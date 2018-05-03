@@ -10,15 +10,25 @@ $(document).ready(function() {
         $.ajax({
             url: "https://www.omdbapi.com/?apikey=90d4b10a&s="+ searchMaterial +""   
         }).done(function(data) {
-            console.log(data.Search.slice( 0, 20));
+        $("#title").empty();
+        if (data.Error) {
+           $("#title").append("<p>"+ data.Error +"</p>");
+           return; 
+        }
+console.log(data)
+          var results = data.Search.slice(0 , 20);
+            for ( var i=0; i<results.length; i=i+1) {
+		$("#title").append("<p>"+ results[i].Title +"</p>");
+		$("#year").append("<p>"+ results[i].Year +"</p>");
+		$("#poster").append("<img src=" + results.Poster + ">");
+	} 
         });
 
     });
     
-
     
+  
     
-    
-    
+   
     
 });
